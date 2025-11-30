@@ -7,15 +7,15 @@ import {
   MdListAlt,
   MdPeople,
   MdRecordVoiceOver,
-  MdLocationOn,
-  MdLocalOffer,
   MdLanguage,
+  MdPerson,
 } from "react-icons/md";
 import { Input } from "@/app/_components/input";
 import { TextArea } from "@/app/_components/text-area";
 import { Dropdown } from "@/app/_components/dropdown";
 import { BackTab } from "@/app/_components/back-tab";
 import { FreeToolCTA } from "../_components/free-tool-cta";
+import { axiosClient } from "@/app/_lib/axios";
 const LANGUAGE_OPTIONS = ["English", "Tagalog", "Taglish"];
 const TONE_OPTIONS = [
   "Friendly",
@@ -30,18 +30,43 @@ const TONE_OPTIONS = [
   "Informative",
 ];
 
+const getCustomErrorMessage = (
+  errorCode?: string,
+  fallback?: string,
+  message?: string
+): string => {
+  switch (errorCode) {
+    case "VALIDATION_ERROR":
+      return (
+        message ||
+        "One or more fields are not valid. Please check your info and try again."
+      );
+    case "LIMITATION_ERROR":
+      return (
+        message || "Sorry, you have reached the usage limit for this tool."
+      );
+    default:
+      return (
+        message || fallback || "An error occurred while generating the post."
+      );
+  }
+};
+
 export default function PostGenerator() {
   const [form, setForm] = useState({
+    first_name: "",
+    last_name: "",
     email: "",
     business_name: "",
     industry: "",
     products_services: "",
     target_audience: "",
     tone: "",
-    location: "",
-    offer: "",
     language: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   // Shared handlers
   const handleChange = (
@@ -62,21 +87,48 @@ export default function PostGenerator() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setResponse("");
+
+    // products_services must be a string
     const result = {
       ...form,
-      products_services: form.products_services
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean),
+      products_services: form.products_services,
     };
-    console.log(result);
+
+    try {
+      await axiosClient.post("/api/post-generator", result);
+      setResponse("Post Successfully Generated, check your email!");
+
+      // Optionally show a toast or message
+    } catch (error: unknown) {
+      if (
+        error &&
+        typeof error === "object" &&
+        "response" in error &&
+        error.response &&
+        typeof error.response === "object" &&
+        "data" in error.response &&
+        error.response.data &&
+        typeof error.response.data === "object" &&
+        "error_code" in error.response.data
+      ) {
+        const errorCode = error.response.data.error_code as string;
+        const errorMessage = getCustomErrorMessage(errorCode);
+        setError(errorMessage);
+      } else {
+        setError("An error occurred while generating the post.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="flex flex-col ">
-      {" "}
       <BackTab />
       <main className="mx-auto max-w-6xl py-12 px-3 sm:px-6">
         <header className="mb-10 text-center">
@@ -153,6 +205,24 @@ export default function PostGenerator() {
         >
           <div className="grid gap-5 sm:grid-cols-2">
             <Input
+              id="first_name"
+              label="First Name"
+              icon={MdPerson}
+              value={form.first_name}
+              onChange={handleChange}
+              required
+              placeholder="e.g. Juan"
+            />
+            <Input
+              id="last_name"
+              label="Last Name"
+              icon={MdPerson}
+              value={form.last_name}
+              onChange={handleChange}
+              required
+              placeholder="e.g. Dela Cruz"
+            />
+            <Input
               id="email"
               label="Email"
               icon={MdEmail}
@@ -180,24 +250,7 @@ export default function PostGenerator() {
               required
               placeholder="e.g. Technology"
             />
-            <Input
-              id="location"
-              label="Location"
-              icon={MdLocationOn}
-              value={form.location}
-              onChange={handleChange}
-              required
-              placeholder="e.g. Manila, Philippines"
-            />
-            <Input
-              id="offer"
-              label="Offer"
-              icon={MdLocalOffer}
-              value={form.offer}
-              onChange={handleChange}
-              required
-              placeholder="e.g. 10% off this month"
-            />
+            {/* Removed "Offer" */}
             <Input
               id="target_audience"
               label="Target Audience"
@@ -227,28 +280,41 @@ export default function PostGenerator() {
               options={LANGUAGE_OPTIONS}
               placeholder="Select language..."
             />
-            <TextArea
-              id="products_services"
-              label="Products / Services"
-              icon={MdListAlt}
-              value={form.products_services}
-              onChange={handleChange}
-              required
-              rows={2}
-              placeholder="e.g. Web development, Mobile app development, API integrations"
-              extraLabel={
-                <span className="ml-2 text-xs text-gray-500">
-                  (comma separated)
-                </span>
-              }
-            />
+            <div className="sm:col-span-2">
+              <TextArea
+                id="products_services"
+                label="Products / Services"
+                icon={MdListAlt}
+                value={form.products_services}
+                onChange={handleChange}
+                required
+                rows={2}
+                placeholder="e.g. Web development, Mobile app development, API integrations"
+                extraLabel={
+                  <span className="ml-2 text-xs text-gray-500">
+                    (comma separated)
+                  </span>
+                }
+              />
+            </div>
           </div>
           <button
             type="submit"
             className="w-full py-2 px-4 bg-primary text-white rounded font-semibold mt-4 flex items-center justify-center gap-2 hover:bg-primary/90 transition"
+            disabled={loading}
           >
-            Generate Post
+            {loading ? "Generating..." : "Generate Post"}
           </button>
+          {error && (
+            <div className="text-red-500 text-center font-medium mt-2">
+              {error}
+            </div>
+          )}
+          {response && (
+            <div className="bg-green-50 border text-green-700 p-4 rounded text-center mt-4">
+              Success! Your post was generated and sent to your email.
+            </div>
+          )}
         </form>
         <div className="max-w-2xl mx-auto mt-10 bg-muted/75 rounded-lg p-6 shadow space-y-4 text-center">
           <h3 className="text-lg font-bold mb-2 text-primary">
