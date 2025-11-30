@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { FaGift } from "react-icons/fa";
+import { axiosClient } from "../_lib/axios";
 
 type LimitedOffer = {
   title: string;
@@ -9,22 +10,18 @@ type LimitedOffer = {
   steps: string[];
 };
 
-// Mocked API call to simulate fetching an offer from the database.
+// Actual API call to fetch an offer from the backend.
 async function fetchLimitedOffer(): Promise<LimitedOffer | null> {
-  // Simulate network delay
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  // Return an offer, or null to simulate "no offer"
-  return {
-    title: "Limited-Time Offer: First 3 Clients Free — Grab Your Spot!",
-    description:
-      "Unlock special access to marketing AI for the first 3 clients for FREE! Click to reveal more details.",
-    steps: [
-      "Book a quick discovery call so we can confirm fit.",
-      "Share your current marketing stack and goals during the call.",
-      "Receive your onboarding link and claim one of the three free spots.",
-      "Complete onboarding within 48 hours to lock in the offer.",
-    ],
-  };
+  try {
+    const response = await axiosClient.get("/api/offers");
+    if (response.data && response.data.offer) {
+      return response.data.offer;
+    }
+    return null;
+  } catch (error) {
+    // Optionally log error.
+    return null;
+  }
 }
 
 export const LimitedOfferBanner = () => {
@@ -41,6 +38,7 @@ export const LimitedOfferBanner = () => {
     let mounted = true;
     fetchLimitedOffer().then((data) => {
       if (mounted) {
+        console.log(data);
         setOffer(data);
         setLoading(false);
       }
