@@ -14,7 +14,7 @@ export const sendMessage = async (
       ? parseInt(existingTokenCountStr)
       : 0;
 
-    if (existingTokenCount >= 2000) {
+    if (existingTokenCount >= 4000) {
       return "token limit reached";
     }
 

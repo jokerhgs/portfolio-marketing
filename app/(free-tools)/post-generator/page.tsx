@@ -150,7 +150,7 @@ export default function PostGenerator() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {/* Info Panel */}
-          <section className="space-y-5 bg-card md:bg-transparent p-6 rounded-lg shadow-sm md:shadow-none border md:border-none">
+          <section className="space-y-5 bg-card md:bg-transparent p-6 rounded-lg shadow-sm md:shadow-none border border-border md:border-none">
             <div>
               <h3 className="text-lg font-semibold mb-1">
                 What You’ll Receive
@@ -177,7 +177,7 @@ export default function PostGenerator() {
           </section>
 
           {/* Value & Privacy Panel */}
-          <section className="space-y-5 bg-card md:bg-transparent p-6 rounded-lg shadow-sm md:shadow-none border md:border-none">
+          <section className="space-y-5 bg-card md:bg-transparent p-6 rounded-lg shadow-sm md:shadow-none border border-border md:border-none">
             <div>
               <h3 className="text-lg font-semibold mb-1">Why It’s Free</h3>
               <p className="text-secondary-foreground text-sm">

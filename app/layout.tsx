@@ -16,6 +16,8 @@ export const metadata: Metadata = {
     "Portfolio and services of Joe Kier Hagos. AI, software, and automation for marketing and growth.",
 };
 
+const googleAnalyticsId = process.env.GOOGLE_ANALYTICS_ID || "";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -24,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.variable} antialiased`}>{children}</body>
-      <GoogleAnalytics gaId="test" />
+      <GoogleAnalytics gaId={googleAnalyticsId} />
     </html>
   );
 }
