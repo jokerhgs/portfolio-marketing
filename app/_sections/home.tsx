@@ -51,14 +51,20 @@ export const HomeSection = () => {
       <div className="relative flex flex-col items-center gap-6 md:gap-8 text-center w-full px-4 sm:px-6 max-w-4xl mx-auto py-[15vh]">
         {/* Greeting */}
         <div className="text-3xl sm:text-4xl md:text-5xl leading-tight font-semibold">
-          Hi! I’m <span className="text-primary">Joker</span>
+          Hi! I’m{" "}
+          <span className="text-primary">
+            Jo
+            <span className="text-secondary-foreground mr-1">e</span>K
+            <span className="text-secondary-foreground">i</span>
+            er
+          </span>
         </div>
 
         {/* Professions */}
         <div className="text-xl sm:text-2xl md:text-3xl font-medium text-secondary-foreground flex flex-col items-center gap-1">
           <span>
-            Software Engineer <span className="text-primary">|</span> AI &amp;
-            Automation Enthusiast
+            Software Engineer <span className="text-primary">|</span> AI
+            Automation Consultant
           </span>
         </div>
 

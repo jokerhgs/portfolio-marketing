@@ -15,7 +15,9 @@ export type MarketingFeatureConfig = {
   description: string;
   icon: IconType;
   problem: string;
+  problemHeader: string;
   solution: string;
+  solutionHeader: string;
   benefits: string[];
   highlights: {
     label: string;
@@ -23,7 +25,6 @@ export type MarketingFeatureConfig = {
     helper: string;
   }[];
 };
-
 export const marketingFeatures: MarketingFeatureConfig[] = [
   {
     slug: "marketing-analytics",
@@ -34,9 +35,11 @@ export const marketingFeatures: MarketingFeatureConfig[] = [
       "All marketing data and AI insights in one place, revealing your best campaign results.",
     icon: FaChartBar,
     problem:
-      "SMBs waste time switching between tools and manually compiling reports to understand which campaigns actually drive revenue.",
+      "Be honest: Are you still wasting hours every week jumping between 5 different tools (like your CRM, Google Ads, and social platform) just to build a single, messy spreadsheet report? Industry research shows that marketing teams can spend **up to 40% of their time** simply on data aggregation and manual reporting. You shouldn't have to guess which campaigns actually deliver revenue.",
+    problemHeader: "The Pain of Manual Reporting",
     solution:
-      "Our analytics engine connects every channel, cleans your data automatically, and surfaces the insights that matter—no spreadsheets or guesswork required.",
+      "Imagine logging in and instantly knowing exactly where to spend your next dollar. Our analytics engine automatically connects *all* your channels, cleans up the confusing data for you, and surfaces only the critical, profitable insights. Companies that prioritize data unification and analytics typically see **revenue growth 15-20% faster** than their peers, allowing you to ditch the spreadsheets and focus on profit.",
+    solutionHeader: "Your New Reality: Clarity & Profit",
     benefits: [
       "Unified dashboard covering email, social, paid media, and web analytics.",
       "AI insights that highlight winners and flag underperforming campaigns.",
@@ -45,19 +48,19 @@ export const marketingFeatures: MarketingFeatureConfig[] = [
     ],
     highlights: [
       {
-        label: "Average ROI lift",
-        value: "22%",
-        helper: "Seen after the first 60 days.",
-      },
-      {
-        label: "Reporting time saved",
-        value: "8 hrs/week",
-        helper: "Thanks to automated dashboards.",
+        label: "Market-proven ROI potential",
+        value: "15%+ Growth",
+        helper: "Typical growth seen by data-driven companies.",
       },
       {
         label: "Data sources connected",
         value: "15+",
         helper: "Email, ads, social, CRM, and more.",
+      },
+      {
+        label: "Eliminates Data Silos",
+        value: "100% Unified",
+        helper: "Combines all your channels into one dashboard.",
       },
     ],
   },
@@ -70,9 +73,11 @@ export const marketingFeatures: MarketingFeatureConfig[] = [
       "Generate captions, visuals, and videos. Schedule posts and keep your brand active everywhere automatically.",
     icon: FaRegCalendarAlt,
     problem:
-      "Teams lose momentum when ideation, approvals, and publishing happen across multiple tools, slowing output and reducing consistency.",
+      "Does your team lose momentum because ideation, approvals, and publishing are scattered across multiple tools? This inconsistency costs time; in fact, content teams typically lose **over 25% of their day** to workflow interruptions and content handoffs, slowing your output and reducing brand consistency.",
+    problemHeader: "The Challenge of Slow Content Flow",
     solution:
-      "Centralized planning, AI-assisted creation, and automated scheduling bring your entire content workflow into one streamlined system.",
+      "Unlock massive efficiency. Our centralized system uses AI-assisted creation, automated scheduling, and one-click publishing to streamline everything. Businesses using content automation generally report **up to a 50% decrease** in content production time, meaning you publish more without needing to grow your headcount.",
+    solutionHeader: "Achieve Rapid Content Velocity",
     benefits: [
       "AI-assisted ideation for posts, newsletters, and landing pages.",
       "Auto-generated variations for each social channel.",
@@ -81,18 +86,18 @@ export const marketingFeatures: MarketingFeatureConfig[] = [
     ],
     highlights: [
       {
-        label: "Time saved per asset",
-        value: "35 min",
-        helper: "Brief → copy → scheduled automatically.",
+        label: "Time Saved on Production",
+        value: "Up to 50%",
+        helper: "Typical time savings reported with content automation.",
       },
       {
-        label: "Content velocity",
-        value: "3×",
-        helper: "Teams publish more without growing headcount.",
+        label: "Workflow Centralization",
+        value: "1 Platform",
+        helper: "Handles ideation, scheduling, and publishing.",
       },
       {
         label: "Brand compliance",
-        value: "98%",
+        value: "Guaranteed",
         helper: "Guardrails keep tone & visuals consistent.",
       },
     ],
@@ -106,9 +111,11 @@ export const marketingFeatures: MarketingFeatureConfig[] = [
       "AI answers customer messages quickly and consistently so no inquiries go unanswered, reducing workload.",
     icon: FaComments,
     problem:
-      "Manual responses are slow and inconsistent, causing frustrated customers and missed opportunities.",
+      "Are you watching valuable leads slip away because your manual response times are too slow? Studies show that response delays exceeding five minutes can drop lead qualification rates by **up to 80%**. Manual responses are inconsistent, causing frustrated customers and missed opportunities that directly impact your bottom line.",
+    problemHeader: "The Cost of Slow Service",
     solution:
-      "Our AI system replies instantly, follows up automatically, and escalates only when needed, keeping customers engaged and reducing response time.",
+      "Stop losing customers to slow service. Our AI system replies instantly, follows up automatically, and escalates only when a human touch is needed. AI-powered customer service typically reduces average response time by **over 65%**, keeping customers engaged and converting more of your incoming queries.",
+    solutionHeader: "Instant Service, Higher Conversion",
     benefits: [
       "Instant replies to customer questions and requests.",
       "Automated follow-ups prevent leads from slipping away.",
@@ -118,22 +125,21 @@ export const marketingFeatures: MarketingFeatureConfig[] = [
     highlights: [
       {
         label: "Response-time reduction",
-        value: "70–75% faster",
-        helper: "Faster than manual replies.",
+        value: "65%+ Faster",
+        helper: "Industry standard reduction with AI automation.",
       },
       {
         label: "Self-service resolution",
-        value: "Many queries",
+        value: "High Volume",
         helper: "Solved without human intervention.",
       },
       {
         label: "Lead retention rate",
-        value: "Higher",
+        value: "Improved",
         helper: "Fewer customers lost due to delayed responses.",
       },
     ],
   },
-
   {
     slug: "brand-consistency-management",
     title: "Brand Consistency Management",
@@ -143,9 +149,11 @@ export const marketingFeatures: MarketingFeatureConfig[] = [
       "AI ensures all emails, chats, and messages follow your brand’s personality and style guidelines.",
     icon: FaRegGem,
     problem:
-      "Automations and messaging often have inconsistent tone or style, which confuses customers and weakens the brand.",
+      "Do your automated messages sometimes sound 'off' or inconsistent with your brand voice? This lack of uniformity erodes trust. Research indicates that brand inconsistency across channels can confuse **up to 60% of consumers** and significantly weaken brand loyalty.",
+    problemHeader: "The Risk of Inconsistent Branding",
     solution:
-      "A centralized brand profile defines how your brand sounds and looks. Our AI enforces these guidelines automatically, so every automation follows your unique brand personality—no matter the channel or team member.",
+      "Define your brand once, and let AI do the rest. Our centralized brand profile system enforces your guidelines automatically, ensuring every automation follows your unique personality. Consistent branding across all platforms is proven to boost revenue by **20% or more**, securing customer trust and loyalty.",
+    solutionHeader: "Automated Brand Alignment",
     benefits: [
       "Automated checks enforce consistent tone and style across all automations.",
       "Usage insights highlight where messaging deviates from brand personality.",
@@ -153,18 +161,18 @@ export const marketingFeatures: MarketingFeatureConfig[] = [
     ],
     highlights: [
       {
-        label: "Consistency improvement",
-        value: "99%",
-        helper: "99% of automations stay aligned with brand personality.",
+        label: "Revenue Boost Potential",
+        value: "20%+",
+        helper: "Typical increase from consistent branding.",
       },
       {
-        label: "Time saved",
-        value: "50% fewer corrections",
-        helper: "Cuts down on back-and-forth and manual revisions.",
+        label: "Error Reduction",
+        value: "Drastic Cut",
+        helper: "Significantly reduces manual tone corrections.",
       },
       {
-        label: "Insight visibility",
-        value: "Instant feedback",
+        label: "Insight Visibility",
+        value: "Instant Feedback",
         helper: "Quickly see which automations need adjustment.",
       },
     ],
@@ -178,9 +186,11 @@ export const marketingFeatures: MarketingFeatureConfig[] = [
       "AI or templates send responses and follow-ups for inquiries automatically—no more missed emails.",
     icon: FaEnvelopeOpenText,
     problem:
-      "Manually responding to inquiries or sending follow-up emails is time-consuming, inconsistent, and can lead to missed opportunities.",
+      "Is manually responding to every inquiry and sending follow-up emails draining your team’s time? Manually managed email cycles often lead to forgotten leads and inconsistent messaging. Studies suggest that automation can save sales and marketing teams **up to 7.5 hours per week** on repetitive tasks.",
+    problemHeader: "The Email Time Sink",
     solution:
-      "AI or prebuilt templates automatically send responses and triggered emails, ensuring timely, consistent communication without manual effort.",
+      "Eliminate repetitive email work forever. Our AI or prebuilt templates automatically deploy responses and complex triggered emails, ensuring timely, consistent communication for every customer. Businesses utilizing marketing automation often experience **a 14.5% increase in sales productivity**, allowing you to focus on strategic growth.",
+    solutionHeader: "Boost Sales Productivity",
     benefits: [
       "Automated responses to inquiries or customer actions.",
       "Trigger-based emails that activate based on behavior or events.",
@@ -189,19 +199,19 @@ export const marketingFeatures: MarketingFeatureConfig[] = [
     ],
     highlights: [
       {
-        label: "Time saved per response",
-        value: "4+ hrs weekly",
-        helper: "Eliminates repetitive manual emailing.",
+        label: "Productivity Lift",
+        value: "14.5% Increase",
+        helper: "Typical increase in sales productivity with automation.",
       },
       {
-        label: "Consistency improvement",
-        value: "99%",
+        label: "Lead Capture Reliability",
+        value: "Maximized",
         helper: "Messages always use the right tone and timing.",
       },
       {
-        label: "Customer retention impact",
-        value: "Fewer missed follow-ups",
-        helper: "Reduces lost leads due to late or missing emails.",
+        label: "Repetitive Task Savings",
+        value: "7+ Hours Weekly",
+        helper: "Industry benchmark for time savings.",
       },
     ],
   },
@@ -214,9 +224,11 @@ export const marketingFeatures: MarketingFeatureConfig[] = [
       "We build or upgrade your website for lead capture, AI messaging, and integrated automations.",
     icon: FaLaptopCode,
     problem:
-      "Many SMBs lack a website that effectively attracts visitors, captures leads, or integrates with their AI systems.",
+      "Is your current website a passive brochure instead of an active conversion engine? If your site isn't fully integrated with your lead-capture and AI systems, you're missing opportunities. An outdated website design or poor integration can lead to a **conversion rate drop of 50% or more**.",
+    problemHeader: "The Passive Website Problem",
     solution:
-      "We create a website designed to showcase your business and capture leads, or we enhance your existing site by integrating AI for messaging, forms, and automated responses—all with fast deployment and no technical expertise needed.",
+      "Get a website designed specifically to capture leads and convert visitors. We build or enhance your existing site by seamlessly integrating AI for chat, forms, and automated responses. Investing in conversion-optimized web design typically yields a **223% return on investment** due to higher lead volumes and faster conversions.",
+    solutionHeader: "Convert Visitors, Maximize ROI",
     benefits: [
       "A website designed to capture leads and showcase your business to potential customers.",
       "Integration with existing AI for chat, forms, or automated responses.",
@@ -225,13 +237,13 @@ export const marketingFeatures: MarketingFeatureConfig[] = [
     ],
     highlights: [
       {
-        label: "Deployment time saved",
-        value: "70% faster",
-        helper: "Than traditional website development.",
+        label: "Typical ROI on Design",
+        value: "223%",
+        helper: "ROI seen from conversion-optimized website design.",
       },
       {
-        label: "AI integration options",
-        value: "Works with your systems",
+        label: "AI Integration",
+        value: "Seamless",
         helper: "Integrates messaging and automation with your existing tools.",
       },
       {

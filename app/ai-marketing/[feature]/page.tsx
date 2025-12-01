@@ -27,7 +27,9 @@ export default async function FeaturePage({ params }: FeaturePageProps) {
     title,
     subtitle,
     problem,
+    problemHeader,
     solution,
+    solutionHeader,
     benefits,
     highlights,
   } = feature;
@@ -39,21 +41,21 @@ export default async function FeaturePage({ params }: FeaturePageProps) {
         <FeatureHeader icon={<Icon />} title={title} subtitle={subtitle} />
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-2 text-primary">
-            Why It&apos;s a Challenge for SMBs
+            {problemHeader}
           </h2>
           <p className="text-base text-muted-foreground">{problem}</p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-2 text-primary">
-            How Our System Solves This
+            {solutionHeader}
           </h2>
           <p className="text-base text-muted-foreground">{solution}</p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-2 text-primary">
-            What You Get
+            With Our AI Marketing Automation, You&#39;ll Get:
           </h2>
           <ul className="list-disc pl-6 space-y-2 text-base text-secondary-foreground">
             {benefits.map((benefit) => (

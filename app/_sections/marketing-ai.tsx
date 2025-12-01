@@ -65,7 +65,7 @@ export const MarketingAISection = () => {
           Who It&apos;s For?
         </h3>
         <p className="mb-2 text-base md:text-lg text-foreground text-left">
-          This system is for small to medium businesses that want:
+          This service is for small to medium businesses that want:
         </p>
         <ul className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-1 text-muted-foreground text-base md:text-lg list-disc list-inside w-full mx-0">
           <>

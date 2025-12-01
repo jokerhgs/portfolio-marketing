@@ -2,51 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 import { FaGift } from "react-icons/fa";
-import { axiosClient } from "../_lib/axios";
-
-type LimitedOffer = {
-  title: string;
-  description: string;
-  steps: string[];
-};
-
-// Actual API call to fetch an offer from the backend.
-async function fetchLimitedOffer(): Promise<LimitedOffer | null> {
-  try {
-    const response = await axiosClient.get("/api/offers");
-    if (response.data && response.data.offer) {
-      return response.data.offer;
-    }
-    return null;
-  } catch (error) {
-    // Optionally log error.
-    return null;
-  }
-}
+import { useOfferStore } from "../_stores/use-offer-store";
 
 export const LimitedOfferBanner = () => {
-  const [offer, setOffer] = useState<LimitedOffer | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { offer, loading, isDismissed, fetchOffer, setIsDismissed } =
+    useOfferStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isDismissed, setIsDismissed] = useState(false);
   const [showTitlePrompt, setShowTitlePrompt] = useState(true);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Fetch the offer right away (on mount)
+  // Fetch the offer right away (on mount) if not already loaded
   useEffect(() => {
-    let mounted = true;
-    fetchLimitedOffer().then((data) => {
-      if (mounted) {
-        console.log(data);
-        setOffer(data);
-        setLoading(false);
-      }
-    });
-    return () => {
-      mounted = false;
-    };
-  }, []);
+    if (!offer && loading) {
+      fetchOffer();
+    }
+  }, [offer, loading, fetchOffer]);
 
   const openModal = () => {
     if (closeTimerRef.current) {
