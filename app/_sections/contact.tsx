@@ -7,7 +7,9 @@ import { ContactFooter } from "../_components/contact-footer";
 import { axiosClient } from "../_lib/axios";
 
 export const ContactSection = () => {
+  // Calculate buildYear at render time
   const buildYear = new Date().getFullYear();
+
   const contactList = [
     {
       name: "Facebook",
@@ -35,13 +37,14 @@ export const ContactSection = () => {
     message: "",
   });
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState<null | string>(null);
-  const [error, setError] = useState<null | string>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -57,7 +60,7 @@ export const ContactSection = () => {
       } else {
         setError("Something went wrong. Please try again later.");
       }
-    } catch (err) {
+    } catch {
       setError("Something went wrong. Please try again later.");
     }
     setLoading(false);
@@ -69,17 +72,16 @@ export const ContactSection = () => {
       className="scroll-mt-24 bg-background w-full py-12 md:py-16 lg:py-20"
     >
       <div className="max-w-7xl mx-auto">
-        {/* Section Title */}
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium text-center border-b border-border pb-3 md:pb-4">
           Get In Touch
         </h2>
-        {/* Intro Text */}
         <div className="w-full flex justify-center mt-8">
           <p className="text-foreground text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl text-center">
-            {`Don't fill this out unless you want to add an extra cash surge to your bottom line. Serious inquiries only.`}
+            {
+              "Don't fill this out unless you want to add an extra cash surge to your bottom line. Serious inquiries only."
+            }
           </p>
         </div>
-        {/* Merged Inputs & Contact List with Vertical Divider */}
         <div className="mt-10 flex flex-col md:flex-row justify-center items-start w-full gap-0 md:gap-0">
           <div className="w-full md:w-auto flex flex-col md:flex-row bg-background border border-border rounded-xl shadow-sm overflow-hidden">
             {/* Form side */}
