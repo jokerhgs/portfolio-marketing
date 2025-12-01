@@ -63,9 +63,9 @@ export const LimitedOfferBanner = () => {
 
   return (
     <>
-      <div className="w-full flex justify-end">
-        <div className="relative pointer-events-none w-[280px] max-w-full sm:w-auto sm:max-w-[90vw]">
-          <div className="flex items-center gap-3 pointer-events-none">
+      <div className="fixed bottom-24 right-4 z-40">
+        <div className="relative pointer-events-none w-[280px] max-w-[80vw] sm:w-auto sm:max-w-[90vw]">
+          <div className="flex items-center justify-end gap-3 pointer-events-none">
             {showTitlePrompt && (
               <div className="relative w-full rounded-md border border-primary/30 bg-white px-4 py-3 text-sm font-semibold text-primary shadow-lg pointer-events-auto">
                 <p>{offer.title}</p>
