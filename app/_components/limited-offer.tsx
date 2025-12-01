@@ -64,10 +64,10 @@ export const LimitedOfferBanner = () => {
   return (
     <>
       <div className="w-full flex justify-end">
-        <div className="relative pointer-events-none max-w-[90vw]">
+        <div className="relative pointer-events-none w-[280px] max-w-full sm:w-auto sm:max-w-[90vw]">
           <div className="flex items-center gap-3 pointer-events-none">
             {showTitlePrompt && (
-              <div className="relative max-w-xs rounded-md border border-primary/30 bg-white px-4 py-3 text-sm font-semibold text-primary shadow-lg pointer-events-auto">
+              <div className="relative w-full rounded-md border border-primary/30 bg-white px-4 py-3 text-sm font-semibold text-primary shadow-lg pointer-events-auto">
                 <p>{offer.title}</p>
                 <button
                   type="button"
@@ -80,7 +80,7 @@ export const LimitedOfferBanner = () => {
               </div>
             )}
             <button
-              className={`flex items-center justify-center rounded-full shadow-lg bg-primary text-white w-16 h-16 ${
+              className={`flex items-center justify-center rounded-full shadow-lg bg-primary text-white w-16 h-16 flex-shrink-0 ${
                 isModalOpen ? "" : "animate-pulse"
               } cursor-pointer pointer-events-auto transition`}
               title="View Limited Offer"
